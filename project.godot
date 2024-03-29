@@ -21,6 +21,16 @@ Global="*res://Scripts/Manager/global.gd"
 
 project/assembly_name="killer_vampire"
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
+2d_physics/layer_3="itens"
+2d_physics/layer_4="world"
+2d_physics/layer_5="hit_box"
+2d_physics/layer_6="hurt_box"
+2d_physics/layer_7="npc"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
