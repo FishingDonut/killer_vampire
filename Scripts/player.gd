@@ -29,7 +29,6 @@ func _ready():
 func _physics_process(delta) -> void:
 
 	_move_direction()
-	_state()
 	_scale_direction()
 	move_and_slide()
 
@@ -42,17 +41,6 @@ func _move_direction() -> void:
 	
 	velocity.x = move_toward(velocity.x, 0, speed_walk)
 	velocity.y = move_toward(velocity.y, 0, speed_walk)
-
-
-func _state() -> void:
-	z_index = position.y
-	var state = "idle"
-	
-	if direction != Vector2.ZERO:
-		state = "walk"
-	
-	if anim.name != state:
-		anim.play(state)
 
 
 func _scale_direction() -> void:

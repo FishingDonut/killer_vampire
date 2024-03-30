@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvehxtl3ij47x"]
+[gd_scene load_steps=17 format=3 uid="uid://bvehxtl3ij47x"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6lx1n"]
 [ext_resource type="Texture2D" uid="uid://bu02mabk7cuml" path="res://Assests/belmont1/idle.png" id="1_qgnpr"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cgmhpfjuvk8wu" path="res://Assests/belmont1/hurt.png" id="3_80h2i"]
 [ext_resource type="Texture2D" uid="uid://b1yqvodww4d2a" path="res://Assests/belmont1/death1.png" id="4_vgg2i"]
 [ext_resource type="Texture2D" uid="uid://cqpjxn0yobgpm" path="res://Assests/belmont1/death2.png" id="5_seypd"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="7_eg4bk"]
+[ext_resource type="Script" path="res://Scripts/States/idleState.gd" id="8_1aaeg"]
+[ext_resource type="Script" path="res://Scripts/States/walkingState.gd" id="9_fsxvr"]
 
 [sub_resource type="Animation" id="Animation_o5nkd"]
 length = 0.001
@@ -310,3 +313,16 @@ visible = false
 shape = SubResource("RectangleShape2D_qx3dn")
 
 [node name="RemoteCamera" type="RemoteTransform2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
+script = ExtResource("7_eg4bk")
+player = NodePath("..")
+current_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_1aaeg")
+player = NodePath("../..")
+
+[node name="walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("9_fsxvr")
+player = NodePath("../..")
