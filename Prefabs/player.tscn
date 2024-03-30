@@ -228,7 +228,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_3s7km"]
-resource_name = "walk"
+resource_name = "walking"
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -286,7 +286,7 @@ _data = {
 "death": SubResource("Animation_b2nep"),
 "hurt": SubResource("Animation_jsnn0"),
 "idle": SubResource("Animation_n6ant"),
-"walk": SubResource("Animation_3s7km")
+"walking": SubResource("Animation_3s7km")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qx3dn"]
@@ -314,10 +314,11 @@ shape = SubResource("RectangleShape2D_qx3dn")
 
 [node name="RemoteCamera" type="RemoteTransform2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state", "anim")]
 script = ExtResource("7_eg4bk")
 player = NodePath("..")
 current_state = NodePath("idle")
+anim = NodePath("../Anim")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("8_1aaeg")
