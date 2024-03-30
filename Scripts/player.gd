@@ -1,10 +1,10 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 
-@onready var sprite = $Sprite
-@onready var anim = $Anim
-@onready var remote_camera = $RemoteCamera
+@onready var sprite = $Sprite as Sprite2D
+@onready var anim = $Anim as AnimationPlayer
+@onready var remote_camera = $RemoteCamera as RemoteTransform2D
 
 
 

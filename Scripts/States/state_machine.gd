@@ -1,8 +1,10 @@
 class_name StateMachine
 extends Node
 
-@export var player : CharacterBody2D
+@export var player: CharacterBody2D
 @export var current_state: State
+@export var anim: AnimationPlayer
+
 var states: Dictionary = {}
 
 
@@ -21,7 +23,7 @@ func on_child_transitioned(state, new_state_name: StringName) -> void:
 	var new_state = states.get(new_state_name)
 
 	if current_state != state:
-		return 
+		return
 
 	if new_state != null:
 		if new_state != current_state:
@@ -39,4 +41,5 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	anim.play(current_state.name)
 	current_state.Physics_update(delta)
