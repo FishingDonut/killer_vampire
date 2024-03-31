@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 
 #status
-var speed_walk = 10.0
+var speed_walk = 100.0
 var max_hp := 100.0
 var current_hp := max_hp
 
@@ -23,9 +23,11 @@ var direction := Vector2.ZERO
 var is_death := false
 var is_hurt := false
 
+signal update_hp(damage: float)
 
 func _ready():
 	Global.player = self
+	update_hp.connect(_update_hp)
 	remote_camera.remote_path = Global.camera.get_path()
 
 
