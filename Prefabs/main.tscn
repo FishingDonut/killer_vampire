@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdb324euxteum"]
+[gd_scene load_steps=5 format=3 uid="uid://cdb324euxteum"]
 
 [ext_resource type="PackedScene" uid="uid://bvehxtl3ij47x" path="res://Prefabs/player.tscn" id="1_08mjr"]
 [ext_resource type="PackedScene" uid="uid://b58d105y8cytt" path="res://Prefabs/camera.tscn" id="2_gf08k"]
 [ext_resource type="Texture2D" uid="uid://dupbgdp4d6am3" path="res://Assests/ui/skull-1.png" id="2_mqnxx"]
+[ext_resource type="PackedScene" uid="uid://bgarceeiu8ucd" path="res://Prefabs/Enemies/ghost_enemy.tscn" id="3_beqbw"]
 
 [node name="Main" type="Node"]
 
@@ -11,6 +12,10 @@
 [node name="Camera" parent="World" instance=ExtResource("2_gf08k")]
 
 [node name="Player" parent="World" instance=ExtResource("1_08mjr")]
+
+[node name="GhostEnemy" parent="World" instance=ExtResource("3_beqbw")]
+position = Vector2(-76, -54)
+move_speed = 100.0
 
 [node name="Controller" type="Control" parent="."]
 layout_mode = 3
