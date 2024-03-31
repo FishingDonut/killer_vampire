@@ -6,13 +6,14 @@ extends Node
 
 var states: Dictionary = {}
 
+signal is_death
 
 func _ready():
+	is_death.connect(_is_death)
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.transitioned.connect(on_child_transitioned)
-			print(states)
 		else:
 			push_warning("Isso nao e um State")
 	current_state.Enter()
@@ -41,3 +42,22 @@ func _process(delta):
 
 func _physics_process(delta):
 	current_state.Physics_update(delta)
+
+
+func _on_hurt_box_body_entered(body):
+	if body.is_in_group("enemies"):
+		states["hurt"]._update_damage(body.damage)
+		current_state.transitioned.emit(current_state, "hurt")
+
+
+func _on_hurt_box_body_exited(body):
+	if body.is_in_group("enemies"):
+		current_state.transitioned.emit(current_state, "idle")
+
+
+func _on_anim_animation_finished(anim_name):
+	if anim_name  == "death":
+		player.queue_free()
+
+func _is_death():
+	current_state.transitioned.emit(current_state, "death")

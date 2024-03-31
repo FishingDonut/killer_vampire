@@ -15,7 +15,7 @@
 
 [node name="GhostEnemy" parent="World" instance=ExtResource("3_beqbw")]
 position = Vector2(-76, -54)
-move_speed = 100.0
+move_speed = 1.0
 
 [node name="Controller" type="Control" parent="."]
 layout_mode = 3
