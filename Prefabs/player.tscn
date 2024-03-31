@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bvehxtl3ij47x"]
+[gd_scene load_steps=19 format=3 uid="uid://bvehxtl3ij47x"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6lx1n"]
 [ext_resource type="Texture2D" uid="uid://bu02mabk7cuml" path="res://Assests/belmont1/idle.png" id="1_qgnpr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="7_eg4bk"]
 [ext_resource type="Script" path="res://Scripts/States/idleState.gd" id="8_1aaeg"]
 [ext_resource type="Script" path="res://Scripts/States/walkingState.gd" id="9_fsxvr"]
+[ext_resource type="Script" path="res://Scripts/States/hurt.gd" id="10_lriqj"]
 
 [sub_resource type="Animation" id="Animation_o5nkd"]
 length = 0.001
@@ -292,6 +293,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qx3dn"]
 size = Vector2(15, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ili3o"]
+size = Vector2(16, 30)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_6lx1n")
@@ -305,15 +309,15 @@ libraries = {
 }
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, 9)
 shape = SubResource("RectangleShape2D_qx3dn")
 
 [node name="HurtBox" type="Area2D" parent="."]
 
 [node name="CollisionHurt" type="CollisionShape2D" parent="HurtBox"]
-visible = false
-shape = SubResource("RectangleShape2D_qx3dn")
-debug_color = Color(0.862745, 0, 0.203922, 0.419608)
+shape = SubResource("RectangleShape2D_ili3o")
+debug_color = Color(0.85098, 0, 0.184314, 0.419608)
 
 [node name="RemoteCamera" type="RemoteTransform2D" parent="."]
 
@@ -332,9 +336,15 @@ script = ExtResource("9_fsxvr")
 player = NodePath("../..")
 anim = NodePath("../../Anim")
 
+[node name="hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "anim")]
+script = ExtResource("10_lriqj")
+player = NodePath("../..")
+anim = NodePath("../../Anim")
+
 [node name="death" type="Node" parent="StateMachine"]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -14.0
 offset_top = 17.0
 offset_right = 14.0
@@ -342,3 +352,5 @@ offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 show_percentage = false
+
+[connection signal="area_shape_entered" from="HurtBox" to="StateMachine" method="_on_hurt_box_area_shape_entered"]

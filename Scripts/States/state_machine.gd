@@ -41,3 +41,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	current_state.Physics_update(delta)
+
+
+func _on_hurt_box_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("enemies"):
+		current_state.transitioned.emit(current_state, "hurt")

@@ -5,10 +5,13 @@ extends CharacterBody2D
 @onready var sprite = $Sprite as Sprite2D
 @onready var anim = $Anim as AnimationPlayer
 @onready var remote_camera = $RemoteCamera as RemoteTransform2D
+@onready var progress_bar = $ProgressBar
 
 
-
+#status
 var speed_walk = 10.0
+var max_hp := 100.0
+var current_hp := max_hp
 
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -46,3 +49,15 @@ func _move_direction() -> void:
 func _scale_direction() -> void:
 	if direction.x != 0:
 		sprite.scale.x = direction.x
+
+func _update_hp(damage) -> void:
+	current_hp += damage
+	if max_hp != current_hp:
+		var tween_hp = get_tree().create_tween()
+		tween_hp.tween_property(progress_bar, "visible", true, 0.5)
+	else:
+		var tween_hp = get_tree().create_tween()
+		tween_hp.tween_property(progress_bar, "visible", false, 0.5)
+	
+	if max_hp <= 0:
+		pass
