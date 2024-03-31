@@ -1,3 +1,7 @@
 [gd_scene format=3 uid="uid://bgarceeiu8ucd"]
 
 [node name="GhostEnemy" type="CharacterBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="Animation" type="AnimationPlayer" parent="."]
