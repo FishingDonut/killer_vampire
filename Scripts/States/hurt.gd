@@ -12,3 +12,6 @@ func Enter() -> void:
 
 func Physics_update(_delta) -> void:
 	player.update_hp.emit(damage)
+
+func _update_damage(new_damage: float) -> void:
+	damage = new_damage

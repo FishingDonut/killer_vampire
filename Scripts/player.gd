@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var anim = $Anim as AnimationPlayer
 @onready var remote_camera = $RemoteCamera as RemoteTransform2D
 @onready var progress_bar = $ProgressBar
+@onready var state_machine = $StateMachine
 
 
 #status
@@ -13,15 +14,11 @@ var speed_walk = 100.0
 var max_hp := 100.0
 var current_hp := max_hp
 
-
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 var direction := Vector2.ZERO
 
-
-var is_death := false
-var is_hurt := false
 
 signal update_hp(damage: float)
 
@@ -53,13 +50,21 @@ func _scale_direction() -> void:
 		sprite.scale.x = direction.x
 
 func _update_hp(damage) -> void:
-	current_hp += damage
-	if max_hp != current_hp:
-		var tween_hp = get_tree().create_tween()
-		tween_hp.tween_property(progress_bar, "visible", true, 0.5)
-	else:
-		var tween_hp = get_tree().create_tween()
-		tween_hp.tween_property(progress_bar, "visible", false, 0.5)
+	var tween_hp = get_tree().create_tween()
+	current_hp -= damage
+	progress_bar.value = current_hp / 100
 	
-	if max_hp <= 0:
-		pass
+	if max_hp != current_hp and current_hp / 100 >= 0.8:
+		tween_hp.tween_property(progress_bar, "modulate", Color(0, 1, 0, 1), 0.2)
+	
+	elif current_hp / 100 >= 0.4:
+		tween_hp.tween_property(progress_bar, "modulate", Color(1, 1, 0, 1), 0.2)
+	
+	elif current_hp / 100 <= 0.4:
+		tween_hp.tween_property(progress_bar, "modulate", Color(1, 0, 0, 1), 0.2)
+
+	else:
+		tween_hp.tween_property(progress_bar, "modulate", Color(1, 0, 0, 0), 0.2)
+	
+	if current_hp <= 0.0:
+		state_machine.is_death.emit()
