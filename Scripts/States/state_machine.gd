@@ -3,7 +3,6 @@ extends Node
 
 @export var player: CharacterBody2D
 @export var current_state: State
-@export var anim: AnimationPlayer
 
 var states: Dictionary = {}
 
@@ -41,5 +40,4 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	anim.play(current_state.name)
 	current_state.Physics_update(delta)
