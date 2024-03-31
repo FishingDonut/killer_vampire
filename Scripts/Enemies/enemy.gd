@@ -8,10 +8,6 @@ extends CharacterBody2D
 var direction: Vector2
 var max_hp: float
 
-signal take_damage(damage: float)
-
-func _ready():
-	take_damage.connect(_take_damage)
 
 func _physics_process(delta):
 	direction = (Global.player.position - position).round().normalized()
