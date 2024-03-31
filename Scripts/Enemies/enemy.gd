@@ -7,7 +7,8 @@ extends CharacterBody2D
 
 var direction: Vector2
 var max_hp: float
-
+var current_hp: float
+var damage: float = 1.0
 
 func _physics_process(delta):
 	direction = (Global.player.position - position).round().normalized()
