@@ -8,4 +8,5 @@ var state_name: String = "death"
 var damage: float = 0.0
 
 func Enter() -> void:
+	player.is_death.emit()
 	anim.play(state_name)
