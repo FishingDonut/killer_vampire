@@ -51,7 +51,7 @@ func _on_hurt_box_body_entered(body):
 
 
 func _on_hurt_box_body_exited(body):
-	if body.is_in_group("enemies"):
+	if body.is_in_group("enemies") and current_state.name != "death":
 		current_state.transitioned.emit(current_state, "idle")
 
 

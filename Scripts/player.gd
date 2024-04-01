@@ -20,7 +20,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction := Vector2.ZERO
 
 
+var is_death: bool = false
+
+
 signal update_hp(damage: float)
+
 
 func _ready():
 	Global.player = self
@@ -29,7 +33,9 @@ func _ready():
 
 
 func _physics_process(delta) -> void:
-
+	if is_death:
+		return
+		
 	_move_direction()
 	_scale_direction()
 	move_and_slide()
@@ -67,4 +73,5 @@ func _update_hp(damage) -> void:
 		tween_hp.tween_property(progress_bar, "modulate", Color(1, 0, 0, 0), 0.2)
 	
 	if current_hp <= 0.0:
+		is_death = true
 		state_machine.is_death.emit()
