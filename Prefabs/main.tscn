@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdb324euxteum"]
+[gd_scene load_steps=6 format=3 uid="uid://cdb324euxteum"]
 
 [ext_resource type="PackedScene" uid="uid://bvehxtl3ij47x" path="res://Prefabs/player.tscn" id="1_08mjr"]
 [ext_resource type="Script" path="res://Scripts/World/World.gd" id="1_nt85h"]
 [ext_resource type="PackedScene" uid="uid://b58d105y8cytt" path="res://Prefabs/camera.tscn" id="2_gf08k"]
 [ext_resource type="Texture2D" uid="uid://dupbgdp4d6am3" path="res://Assests/ui/skull-1.png" id="2_mqnxx"]
 [ext_resource type="PackedScene" uid="uid://bgarceeiu8ucd" path="res://Prefabs/Enemies/ghost_enemy.tscn" id="3_beqbw"]
-[ext_resource type="PackedScene" uid="uid://dhmfycpjf6lnl" path="res://Prefabs/Weapon/scythe.tscn" id="4_om15r"]
 
 [node name="Main" type="Node"]
 
@@ -20,11 +19,6 @@ script = ExtResource("1_nt85h")
 position = Vector2(3, 96)
 move_speed = 1.0
 max_hp = 2.0
-
-[node name="Scythe" parent="World" instance=ExtResource("4_om15r")]
-position = Vector2(-26, 91)
-direction = Vector2(1, 0)
-move_speed = 5.0
 
 [node name="Controller" type="Control" parent="."]
 layout_mode = 3

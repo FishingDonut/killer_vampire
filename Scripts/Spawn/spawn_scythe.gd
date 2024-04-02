@@ -3,32 +3,33 @@ extends Node2D
 
 @export var scythe := preload("res://Prefabs/Weapon/scythe.tscn")
 @export var player: Player
-var current_world: World
+@export var current_world: World
 
 @onready var cool_down = $CoolDown
 
-var direction := Vector2.ZERO
+var direction := Vector2(1, 0)
 var is_cool_down := false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	current_world = Global.current_world
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if current_world == null:
-		print('nulo')
 		current_world = Global.current_world
-	if player.direction.x == 0 or is_cool_down:
-		return
 	
-	global_position = player.global_position
-	position += direction * 16
-	direction.x = player.direction.x
+		
+	if player.direction.x != 0:
+		direction.x = player.direction.x
+		
+	if is_cool_down:
+		return
 	
 	var scythe_instantiate = scythe.instantiate()
 	scythe_instantiate.direction = direction
+	scythe_instantiate.position = player.position
+	scythe_instantiate.position += direction * 16
 	current_world.call_deferred("add_child", scythe_instantiate)
 	is_cool_down = true
 	cool_down.start()
