@@ -198,6 +198,8 @@ size = Vector2(14, 10)
 size = Vector2(16, 31)
 
 [node name="GhostEnemy" type="CharacterBody2D" groups=["enemies", "ghost_enemy"]]
+collision_layer = 2
+collision_mask = 16
 platform_floor_layers = 4294967294
 script = ExtResource("1_oi33n")
 
