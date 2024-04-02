@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bvehxtl3ij47x"]
+[gd_scene load_steps=21 format=3 uid="uid://bvehxtl3ij47x"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6lx1n"]
 [ext_resource type="Texture2D" uid="uid://bu02mabk7cuml" path="res://Assests/belmont1/idle.png" id="1_qgnpr"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/States/walkingState.gd" id="9_fsxvr"]
 [ext_resource type="Script" path="res://Scripts/States/hurt.gd" id="10_lriqj"]
 [ext_resource type="Script" path="res://Scripts/States/death.gd" id="11_2syu2"]
+[ext_resource type="PackedScene" uid="uid://1skb6tn48mbu" path="res://Prefabs/Spawn/spawn_scythe.tscn" id="12_umch4"]
 
 [sub_resource type="Animation" id="Animation_o5nkd"]
 length = 0.001
@@ -372,6 +373,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 max_value = 1.0
 step = 0.001
 show_percentage = false
+
+[node name="SpawnScythe" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_umch4")]
+player = NodePath("..")
 
 [connection signal="animation_finished" from="Anim" to="StateMachine" method="_on_anim_animation_finished"]
 [connection signal="body_entered" from="HurtBox" to="StateMachine" method="_on_hurt_box_body_entered"]
