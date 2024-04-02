@@ -3,12 +3,14 @@ extends CharacterBody2D
 
 
 @export var move_speed: float
-
+@export var max_hp: float
 
 var direction: Vector2
-var max_hp: float
 var current_hp: float
 var damage: float = 1.0
+
+func  _ready():
+	current_hp = max_hp
 
 func _physics_process(delta):
 	if !Global.player:
@@ -23,7 +25,8 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func _take_damage(damage):
-	max_hp -= damage
-	if max_hp <= 0:
+func _update_heart(damage) -> void:
+	current_hp -= damage
+	print(current_hp)
+	if current_hp <= 0:
 		queue_free()
