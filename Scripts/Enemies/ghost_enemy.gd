@@ -17,10 +17,6 @@ func  _ready():
 	hurt_area_collision.update_health.connect(_update_heart)
 
 func _physics_process(delta):
-	if !Global.player:
-		return
-	direction = round((Global.player.position - position).normalized())
-
 	if direction:
 		velocity = direction * move_speed
 	else:
@@ -29,10 +25,16 @@ func _physics_process(delta):
 
 	if direction.x != 0:
 		sprite.scale.x = direction.x
-		
+
 	move_and_slide()
+	if !Global.player:
+		return
+	direction = round((Global.player.position - position).normalized())
 
 func _update_heart(damage: float) -> void:
 	current_hp -= damage
 	if current_hp <= 0:
 		queue_free()
+
+func _no_player() -> void:
+	direction = -direction

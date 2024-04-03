@@ -14,6 +14,7 @@
 scale = Vector2(2, 2)
 
 [node name="Player" parent="World" instance=ExtResource("1_08mjr")]
+max_hp = 1.0
 
 [node name="GhostEnemy" parent="World" instance=ExtResource("3_beqbw")]
 position = Vector2(3, 96)
@@ -22,6 +23,7 @@ max_hp = 20.0
 
 [node name="SpawnEnemy" parent="World" node_paths=PackedStringArray("player") instance=ExtResource("4_1m028")]
 player = NodePath("../Player")
+time_interval = 0.1
 
 [node name="Controller" type="Control" parent="."]
 layout_mode = 3

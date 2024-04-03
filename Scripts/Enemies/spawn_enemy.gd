@@ -4,6 +4,7 @@ extends Node2D
 @export var player: Player
 @export var move_speed := 40.0
 @export var max_hp := 1.0
+@export var time_interval := 0.3
 
 @onready var timer = $Timer
 
@@ -26,7 +27,7 @@ func _process(delta):
 	player.get_parent().call_deferred("add_child", enemy_instantiate)
 	_new_distance()
 	is_cool_down = true
-	timer.start()
+	timer.start(time_interval)
 
 func _new_distance() -> void:
 	distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 400
