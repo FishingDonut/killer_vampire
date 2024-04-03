@@ -6,5 +6,6 @@
 script = ExtResource("1_i4pd1")
 
 [node name="CoolDown" type="Timer" parent="."]
+wait_time = 7.0
 
 [connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]

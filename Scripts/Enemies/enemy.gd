@@ -1,6 +1,8 @@
 class_name Enemy
 extends CharacterBody2D
 
+@onready var animation = $Animation
+@onready var sprite = $Sprite
 
 @export var move_speed: float
 @export var max_hp: float
@@ -15,7 +17,7 @@ func  _ready():
 func _physics_process(delta):
 	if !Global.player:
 		return
-	direction = (Global.player.position - position).round().normalized()
+	direction = round((Global.player.position - position).normalized())
 
 	if direction:
 		velocity = direction * move_speed
@@ -23,10 +25,12 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		velocity.y = move_toward(velocity.y, 0, move_speed)
 
+	if direction.x != 0:
+		sprite.scale.x = direction.x
+		
 	move_and_slide()
 
 func _update_heart(damage) -> void:
 	current_hp -= damage
-	print(current_hp)
 	if current_hp <= 0:
 		queue_free()

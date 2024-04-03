@@ -330,6 +330,7 @@ shape = SubResource("RectangleShape2D_qx3dn")
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
+collision_mask = 2
 
 [node name="CollisionHurt" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_ili3o")
