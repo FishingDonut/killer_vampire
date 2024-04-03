@@ -304,13 +304,14 @@ _data = {
 "walking": SubResource("Animation_3s7km")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qx3dn"]
-size = Vector2(15, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_oete8"]
+radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ili3o"]
 size = Vector2(16, 30)
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_mask = 2
 platform_floor_layers = 4294967293
 script = ExtResource("1_6lx1n")
@@ -324,12 +325,10 @@ libraries = {
 }
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-0.5, 9)
-shape = SubResource("RectangleShape2D_qx3dn")
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_oete8")
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionHurt" type="CollisionShape2D" parent="HurtBox"]

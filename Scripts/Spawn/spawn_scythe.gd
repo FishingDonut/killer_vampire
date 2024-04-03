@@ -4,8 +4,8 @@ extends Node2D
 @export var scythe := preload("res://Prefabs/Weapon/scythe.tscn")
 @export var player: Player
 @export var move_speed: float = 300
-@export var time_cool_down: float = 5.5
-@export var damage: float = 5.0
+@export var time_cool_down: float = 3.5
+@export var damage: float = 10.0
 
 @onready var cool_down = $CoolDown
 

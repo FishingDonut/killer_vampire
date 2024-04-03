@@ -2,7 +2,8 @@ extends Node2D
 
 @export var enemy = preload("res://Prefabs/Enemies/ghost_enemy.tscn")
 @export var player: Player
-@export var move_speed := 3.0
+@export var move_speed := 40.0
+@export var max_hp := 1.0
 
 @onready var timer = $Timer
 
@@ -19,7 +20,7 @@ func _process(delta):
 		return
 		
 	var enemy_instantiate = enemy.instantiate()
-	enemy_instantiate.max_hp = 5
+	enemy_instantiate.max_hp = max_hp
 	enemy_instantiate.position = player.position + distance
 	enemy_instantiate.move_speed = move_speed
 	player.get_parent().call_deferred("add_child", enemy_instantiate)
@@ -28,9 +29,9 @@ func _process(delta):
 	timer.start()
 
 func _new_distance() -> void:
-	distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 1000
+	distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 400
 	while distance == Vector2.ZERO:
-		distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 1000
+		distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 400
 
 
 func _on_timer_timeout():
