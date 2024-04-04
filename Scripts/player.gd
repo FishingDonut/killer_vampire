@@ -10,9 +10,9 @@ extends CharacterBody2D
 
 
 #status
-var speed_walk = 100.0
-var max_hp := 100.0
-var current_hp := max_hp
+@export var speed_walk = 100.0
+@export var max_hp: float = 100.0
+var current_hp
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -28,6 +28,7 @@ signal update_hp(damage: float)
 
 func _ready():
 	Global.player = self
+	current_hp = max_hp
 	update_hp.connect(_update_hp)
 	remote_camera.remote_path = Global.camera.get_path()
 
