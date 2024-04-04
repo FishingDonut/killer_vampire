@@ -23,13 +23,13 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		velocity.y = move_toward(velocity.y, 0, move_speed)
 
-	if direction.x != 0:
-		sprite.scale.x = direction.x
-
+	if round(direction.x) != 0:
+		sprite.scale.x = round(direction.x)
+		pass
 	move_and_slide()
 	if !Global.player:
 		return
-	direction = round((Global.player.position - position).normalized())
+	direction = (Global.player.position - position).normalized()
 
 func _update_heart(damage: float) -> void:
 	current_hp -= damage

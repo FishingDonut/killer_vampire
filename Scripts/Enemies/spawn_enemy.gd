@@ -28,11 +28,12 @@ func _process(delta):
 	_new_distance()
 	is_cool_down = true
 	timer.start(time_interval)
+	
 
 func _new_distance() -> void:
-	distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 400
+	distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * randi_range(300, 500)
 	while distance == Vector2.ZERO:
-		distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * 400
+		distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * randi_range(300, 500)
 
 
 func _on_timer_timeout():
