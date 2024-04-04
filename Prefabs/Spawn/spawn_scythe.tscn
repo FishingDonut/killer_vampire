@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://1skb6tn48mbu"]
+
+[ext_resource type="Script" path="res://Scripts/Spawn/spawn_scythe.gd" id="1_i4pd1"]
+
+[node name="SpawnScythe" type="Node2D"]
+script = ExtResource("1_i4pd1")
+
+[node name="CoolDown" type="Timer" parent="."]
+wait_time = 7.0
+
+[connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
