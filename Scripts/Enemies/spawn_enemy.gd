@@ -31,9 +31,9 @@ func _process(delta):
 	
 
 func _new_distance() -> void:
-	distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * randi_range(300, 500)
+	distance = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * randi_range(300, 500)
 	while distance == Vector2.ZERO:
-		distance = Vector2(randi_range(-1, 1), randi_range(-1, 1)) * randi_range(300, 500)
+		distance = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * randi_range(300, 500)
 
 
 func _on_timer_timeout():
