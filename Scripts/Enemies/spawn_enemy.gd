@@ -6,10 +6,12 @@ extends Node2D
 @export var max_hp := 1.0
 @export var time_interval := 0.3
 @export var max_enemies: int
+@export var min_distance: int
+@export var max_distance: int
 
 @onready var timer = $Timer
 
-var distance : Vector2 
+var distance : Vector2 = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * randi_range(min_distance, max_distance)
 var is_cool_down: bool = false
 
 func _ready() -> void:
@@ -35,9 +37,8 @@ func _process(delta):
 	
 
 func _new_distance() -> void:
-	distance = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * randi_range(300, 500)
-	while distance == Vector2.ZERO:
-		distance = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * randi_range(300, 500)
+	if player.direction:
+		distance = player.direction * randf_range(min_distance, max_distance)
 
 
 func _on_timer_timeout():

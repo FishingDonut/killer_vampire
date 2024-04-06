@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cibafeqhqfvgx"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/xp.gd" id="1_dlh1y"]
+[ext_resource type="Texture2D" uid="uid://ct4fp217lk8bl" path="res://Assests/enemies/xp-1.png" id="2_12ts5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6h36u"]
+radius = 4.0
+
+[node name="Xp" type="Node2D"]
+script = ExtResource("1_dlh1y")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_12ts5")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionCollete" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("CircleShape2D_6h36u")
+
+[connection signal="area_entered" from="CollisionArea" to="." method="_on_collision_area_area_entered"]
+[connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]

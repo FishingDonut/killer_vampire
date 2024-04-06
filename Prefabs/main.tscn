@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdb324euxteum"]
+[gd_scene load_steps=6 format=3 uid="uid://cdb324euxteum"]
 
 [ext_resource type="PackedScene" uid="uid://bvehxtl3ij47x" path="res://Prefabs/player.tscn" id="1_08mjr"]
 [ext_resource type="PackedScene" uid="uid://b58d105y8cytt" path="res://Prefabs/camera.tscn" id="2_gf08k"]
 [ext_resource type="PackedScene" uid="uid://wk70ijutp7fi" path="res://Prefabs/Spawn/spawn_enemy.tscn" id="4_1m028"]
+[ext_resource type="PackedScene" uid="uid://cibafeqhqfvgx" path="res://Prefabs/Enemies/xp.tscn" id="4_q1ilc"]
 [ext_resource type="PackedScene" uid="uid://ybsbtbj6qu5d" path="res://Prefabs/hud/layer_hud.tscn" id="5_x61cw"]
 
 [node name="Main" type="Node"]
@@ -13,12 +14,17 @@
 scale = Vector2(2, 2)
 
 [node name="Player" parent="World" instance=ExtResource("1_08mjr")]
-max_hp = 300.0
 
 [node name="SpawnEnemy" parent="World" node_paths=PackedStringArray("player") instance=ExtResource("4_1m028")]
 player = NodePath("../Player")
+move_speed = 50.0
+max_hp = 20.0
 time_interval = 1.0
-max_enemies = 10
+min_distance = 50
+max_distance = 70
+
+[node name="Xp" parent="World" instance=ExtResource("4_q1ilc")]
+position = Vector2(-68, -25)
 
 [node name="Controller" type="Control" parent="."]
 layout_mode = 3

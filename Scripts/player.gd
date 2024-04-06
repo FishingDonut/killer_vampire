@@ -19,6 +19,7 @@ var is_death: bool = false
 
 
 signal update_hp(damage: float)
+signal collect_xp(xp_value: float)
 
 
 func _ready():
@@ -26,6 +27,7 @@ func _ready():
 	progress_bar.max_value = (max_hp / max_hp ) * 100
 	current_hp = max_hp
 	update_hp.connect(_update_hp)
+	collect_xp.connect(_update_xp)
 	remote_camera.remote_path = Global.camera.get_path()
 
 
@@ -71,3 +73,6 @@ func _update_hp(damage) -> void:
 	if current_hp <= 0.0:
 		is_death = true
 		state_machine.is_death.emit()
+
+func _update_xp(xp) -> void:
+	print(xp)

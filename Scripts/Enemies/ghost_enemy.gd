@@ -13,6 +13,8 @@ extends CharacterBody2D
 var direction: Vector2
 var current_hp: float
 var damage: float = 1.0
+var is_death: bool = false
+var is_hurt: bool = false
 
 
 func  _ready():
@@ -21,6 +23,8 @@ func  _ready():
 	hurt_area_collision.update_health.connect(_update_heart)
 
 func _physics_process(delta) -> void:
+	_state()
+	
 	if direction:
 		velocity = direction * move_speed
 	else:
@@ -30,18 +34,44 @@ func _physics_process(delta) -> void:
 	if round(direction.x) != 0:
 		sprite.scale.x = round(direction.x)
 		pass
+		
+	if is_death:
+		return	
+	
 	move_and_slide()
+	
 	if !Global.player:
 		return
 	direction = (Global.player.position - position).normalized()
 
 func _update_heart(damage: float) -> void:
 	current_hp -= damage
+	is_hurt = true
 	if current_hp <= 0:
+		is_death = true
 		Global.counter_score += randi_range(100, 300)
 		Global.counter_kill += 1
 		Global.counter_enemies -= 1
-		queue_free()
+		
 
-func _no_player() -> void:
-	direction = -direction
+func _state() -> void:
+	var state = "idle"
+	
+	if is_death:
+		state = "death"
+		
+	elif is_hurt:
+		state = "hurt"
+	
+	elif direction:
+		state = "walking"
+	
+	if animation.name != state:
+		animation.play(state)
+
+
+func _on_animation_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()
+	elif anim_name == "hurt":
+		is_hurt = false
