@@ -5,6 +5,7 @@ extends Node2D
 @export var move_speed := 40.0
 @export var max_hp := 1.0
 @export var time_interval := 0.3
+@export var max_enemies: int
 
 @onready var timer = $Timer
 
@@ -15,6 +16,9 @@ func _ready() -> void:
 	_new_distance()
 
 func _process(delta):
+	if Global.counter_enemies >= max_enemies:
+		return
+	
 	if is_cool_down:
 		return
 	if player == null:

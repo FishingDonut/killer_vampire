@@ -14,12 +14,7 @@ extends CharacterBody2D
 @export var max_hp: float = 100.0
 var current_hp
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-
 var direction := Vector2.ZERO
-
-
 var is_death: bool = false
 
 
@@ -28,6 +23,7 @@ signal update_hp(damage: float)
 
 func _ready():
 	Global.player = self
+	progress_bar.max_value = (max_hp / max_hp ) * 100
 	current_hp = max_hp
 	update_hp.connect(_update_hp)
 	remote_camera.remote_path = Global.camera.get_path()
@@ -59,15 +55,14 @@ func _scale_direction() -> void:
 func _update_hp(damage) -> void:
 	var tween_hp = get_tree().create_tween()
 	current_hp -= damage
-	progress_bar.value = current_hp / 100
-	
-	if max_hp != current_hp and current_hp / 100 >= 0.8:
+	progress_bar.value = (current_hp / max_hp) * 100
+	if max_hp != current_hp and (current_hp / max_hp) * 100 >= 80:
 		tween_hp.tween_property(progress_bar, "modulate", Color(0, 1, 0, 1), 0.2)
 	
-	elif current_hp / 100 >= 0.4:
+	elif (current_hp / max_hp) * 100 >= 50:
 		tween_hp.tween_property(progress_bar, "modulate", Color(1, 1, 0, 1), 0.2)
 	
-	elif current_hp / 100 <= 0.4:
+	elif (current_hp / max_hp) * 100 <= 50:
 		tween_hp.tween_property(progress_bar, "modulate", Color(1, 0, 0, 1), 0.2)
 
 	else:
