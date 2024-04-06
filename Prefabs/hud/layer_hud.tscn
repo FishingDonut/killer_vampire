@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://ybsbtbj6qu5d"]
+
+[ext_resource type="Script" path="res://Scripts/Hud/layer_hud.gd" id="1_imi36"]
+[ext_resource type="Texture2D" uid="uid://dupbgdp4d6am3" path="res://Assests/ui/skull-1.png" id="1_tne7u"]
+[ext_resource type="Texture2D" uid="uid://2jd21y5q1nwu" path="res://Assests/ui/skull-2.png" id="2_j3x1f"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_hs4kj"]
+frames = 2
+frame_0/texture = ExtResource("1_tne7u")
+frame_0/duration = 0.3
+frame_1/texture = ExtResource("2_j3x1f")
+frame_1/duration = 0.3
+
+[node name="CanvasLayerHud" type="CanvasLayer"]
+script = ExtResource("1_imi36")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GridKill" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/GridKill"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AnimatedTexture_hs4kj")
+
+[node name="LabelKill" type="Label" parent="MarginContainer/GridKill"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "KILL :"
+
+[node name="CounterKill" type="Label" parent="MarginContainer/GridKill"]
+layout_mode = 2
+text = "000000"
+metadata/_edit_lock_ = true
+
+[node name="GridTime" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="LabelTime" type="Label" parent="MarginContainer/GridTime"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TIME :"
+
+[node name="CounterTime" type="Label" parent="MarginContainer/GridTime"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "00:00
+"
+
+[node name="GridScore" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="LabelScore" type="Label" parent="MarginContainer/GridScore"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SCORE :"
+
+[node name="CounterScore" type="Label" parent="MarginContainer/GridScore"]
+layout_mode = 2
+text = "000000000"
