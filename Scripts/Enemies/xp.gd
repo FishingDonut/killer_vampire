@@ -15,6 +15,6 @@ func _on_collision_area_body_entered(body):
 
 
 func _on_collision_area_area_entered(area):
-	if area.is_in_group("player"):
+	if area.get_parent() is Player:
 		area.get_parent().collect_xp.emit(xp_value)
 		queue_free()
