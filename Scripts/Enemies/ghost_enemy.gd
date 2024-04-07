@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animation = $Animation
 @onready var sprite = $Sprite
 @onready var hurt_area_collision = $HurtAreaCollision
+@onready var spawn_xp = $SpawnXp
 
 
 @export var move_speed: float
@@ -72,6 +73,7 @@ func _state() -> void:
 
 func _on_animation_animation_finished(anim_name):
 	if anim_name == "death":
+		spawn_xp.spawn_xp.emit()
 		queue_free()
 	elif anim_name == "hurt":
 		is_hurt = false

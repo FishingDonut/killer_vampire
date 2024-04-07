@@ -11,6 +11,7 @@ extends Node2D
 
 @onready var timer = $Timer
 
+var direction := Vector2(1, 0)
 var distance : Vector2 = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * randi_range(min_distance, max_distance)
 var is_cool_down: bool = false
 
@@ -38,7 +39,8 @@ func _process(delta):
 
 func _new_distance() -> void:
 	if player.direction:
-		distance = player.direction * randf_range(min_distance, max_distance)
+		direction = player.direction
+	distance = direction * randf_range(min_distance, max_distance)
 
 
 func _on_timer_timeout():

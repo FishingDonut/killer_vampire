@@ -15,6 +15,7 @@ y_sort_enabled = true
 scale = Vector2(2, 2)
 
 [node name="Player" parent="World" instance=ExtResource("1_08mjr")]
+max_hp = 300.0
 
 [node name="SpawnEnemy" parent="World" node_paths=PackedStringArray("player") instance=ExtResource("4_1m028")]
 player = NodePath("../Player")
