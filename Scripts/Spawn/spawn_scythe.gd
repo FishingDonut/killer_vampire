@@ -28,7 +28,7 @@ func _process(delta):
 func _spawn_scythe() -> void:
 	var scythe_instantiate = scythe.instantiate()
 	scythe_instantiate.move_speed = move_speed
-	scythe_instantiate.damage = damage
+	scythe_instantiate.damage = damage + player.damage
 	scythe_instantiate.direction = direction
 	scythe_instantiate.position = player.position
 	scythe_instantiate.position += direction * 16

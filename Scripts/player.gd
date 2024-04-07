@@ -12,7 +12,16 @@ extends CharacterBody2D
 #status
 @export var speed_walk = 100.0
 @export var max_hp: float = 100.0
+@export var damage: float = 1.0
 var current_hp
+
+
+#experience
+@onready var level : int = 1
+@onready var experience : float = 0
+@onready var total_experience : float = 0
+@onready var required_experience = _get_required_experience(level + 1)
+
 
 var direction := Vector2.ZERO
 var is_death: bool = false
@@ -27,7 +36,7 @@ func _ready():
 	progress_bar.max_value = (max_hp / max_hp ) * 100
 	current_hp = max_hp
 	update_hp.connect(_update_hp)
-	collect_xp.connect(_update_xp)
+	collect_xp.connect(_gain_experience)
 	remote_camera.remote_path = Global.camera.get_path()
 
 
@@ -74,5 +83,23 @@ func _update_hp(damage) -> void:
 		is_death = true
 		state_machine.is_death.emit()
 
-func _update_xp(xp) -> void:
-	print(xp)
+
+#system experience
+func _get_required_experience(level: int):
+	return  pow(level, 1.8) + level * 4
+
+
+func _gain_experience(amount) -> void:
+	total_experience += amount
+	experience += amount
+	while experience >= required_experience:
+		experience -= required_experience
+		_level_up()
+
+func _level_up() -> void:
+	level += 1
+	required_experience = _get_required_experience(level + 1)
+	var states := ["speed_walk", "max_hp", "damage"]
+	var random_state = states[randi() % states.size()]
+	set(random_state, get(random_state) * 1.2)
+	print(get(random_state))
