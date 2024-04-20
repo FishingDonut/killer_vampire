@@ -64,6 +64,7 @@ func _scale_direction() -> void:
 		sprite.scale.x = direction.x
 
 func _update_hp(damage) -> void:
+	_hit_flash()
 	var tween_hp = get_tree().create_tween()
 	current_hp -= damage
 	progress_bar.value = (current_hp / max_hp) * 100
@@ -82,7 +83,6 @@ func _update_hp(damage) -> void:
 	if current_hp <= 0.0:
 		is_death = true
 		state_machine.is_death.emit()
-	_hit_flash()
 
 
 func _hit_flash() -> void:
