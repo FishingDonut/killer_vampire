@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bvehxtl3ij47x"]
+[gd_scene load_steps=24 format=3 uid="uid://bvehxtl3ij47x"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6lx1n"]
+[ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="1_mb48t"]
 [ext_resource type="Texture2D" uid="uid://bu02mabk7cuml" path="res://Assests/belmont1/idle.png" id="1_qgnpr"]
 [ext_resource type="Texture2D" uid="uid://b04o2yaytfse" path="res://Assests/belmont1/walk.png" id="2_r7bwj"]
 [ext_resource type="Texture2D" uid="uid://cgmhpfjuvk8wu" path="res://Assests/belmont1/hurt.png" id="3_80h2i"]
@@ -12,6 +13,10 @@
 [ext_resource type="Script" path="res://Scripts/States/hurt.gd" id="10_lriqj"]
 [ext_resource type="Script" path="res://Scripts/States/death.gd" id="11_2syu2"]
 [ext_resource type="PackedScene" uid="uid://1skb6tn48mbu" path="res://Prefabs/Spawn/spawn_scythe.tscn" id="12_umch4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4wtbr"]
+shader = ExtResource("1_mb48t")
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="Animation" id="Animation_o5nkd"]
 length = 0.001
@@ -368,6 +373,7 @@ platform_floor_layers = 4294967293
 script = ExtResource("1_6lx1n")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4wtbr")
 texture = ExtResource("1_qgnpr")
 
 [node name="Anim" type="AnimationPlayer" parent="."]

@@ -25,7 +25,7 @@ var current_hp
 
 var direction := Vector2.ZERO
 var is_death: bool = false
-
+var flash_intensity := 0.0
 
 signal update_hp(damage: float)
 signal collect_xp(xp_value: float)
@@ -82,6 +82,15 @@ func _update_hp(damage) -> void:
 	if current_hp <= 0.0:
 		is_death = true
 		state_machine.is_death.emit()
+	_hit_flash()
+
+
+func _hit_flash() -> void:
+	flash_intensity = 1.0
+	sprite.material.set_shader_parameter("flash_intensity", flash_intensity)
+	await get_tree().create_timer(0.1).timeout
+	flash_intensity = 0.0
+	sprite.material.set_shader_parameter("flash_intensity", flash_intensity)
 
 
 #system experience
