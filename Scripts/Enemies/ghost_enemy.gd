@@ -56,7 +56,7 @@ func _update_heart(damage: float) -> void:
 		
 
 func _state() -> void:
-	var state = "idle"
+	var state = _direction("idle")
 	
 	if is_death:
 		state = "death"
@@ -65,7 +65,7 @@ func _state() -> void:
 		state = "hurt"
 	
 	elif direction:
-		state = "walking"
+		state = _direction("walking")
 	
 	if animation.name != state:
 		animation.play(state)
@@ -77,3 +77,14 @@ func _on_animation_animation_finished(anim_name):
 		queue_free()
 	elif anim_name == "hurt":
 		is_hurt = false
+
+func _direction(state_anim: String):
+	if direction:
+		if direction.y > 0:
+			return state_anim + "_down"
+		elif direction.y < 0:
+			return state_anim + "_up"
+		if direction.x != 0:
+			return state_anim + "_x"
+	else:
+		return state_anim
