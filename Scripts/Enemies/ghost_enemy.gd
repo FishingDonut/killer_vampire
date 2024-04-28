@@ -61,8 +61,8 @@ func _state() -> void:
 	if is_death:
 		state = "death"
 		
-	elif is_hurt:
-		state = "hurt"
+	#elif is_hurt:
+		#pass
 	
 	elif direction:
 		state = "walking"
