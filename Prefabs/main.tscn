@@ -12,13 +12,15 @@ y_sort_enabled = true
 
 [node name="Camera" parent="World" instance=ExtResource("2_gf08k")]
 scale = Vector2(2, 2)
+zoom_camera = 2.0
 
 [node name="Player" parent="World" instance=ExtResource("1_08mjr")]
+speed_walk = 200.0
 max_hp = 300.0
 
 [node name="SpawnEnemy" parent="World" node_paths=PackedStringArray("player") instance=ExtResource("4_1m028")]
 player = NodePath("../Player")
-move_speed = 50.0
+move_speed = 25.0
 max_hp = 20.0
 time_interval = 1.0
 max_enemies = 150
