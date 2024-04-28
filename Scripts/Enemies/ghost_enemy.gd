@@ -79,12 +79,16 @@ func _on_animation_animation_finished(anim_name):
 		is_hurt = false
 
 func _direction(state_anim: String):
-	if direction:
+	var distance = abs(Global.player.position - position)
+	if !direction:
+		return state_anim
+		
+	if distance.x < distance.y:
 		if direction.y > 0:
 			return state_anim + "_down"
 		elif direction.y < 0:
 			return state_anim + "_up"
+	else:
 		if direction.x != 0:
 			return state_anim + "_x"
-	else:
-		return state_anim
+	return state_anim
