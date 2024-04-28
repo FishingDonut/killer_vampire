@@ -18,6 +18,12 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 
 Global="*res://Scripts/Manager/global.gd"
 
+[display]
+
+window/size/viewport_width=160
+window/size/viewport_height=144
+window/stretch/aspect="ignore"
+
 [dotnet]
 
 project/assembly_name="killer_vampire"
