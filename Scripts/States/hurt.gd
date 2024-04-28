@@ -8,7 +8,7 @@ var state_name: String = "hurt"
 var damage: float = 0.0
 
 func Enter() -> void:
-	anim.play(state_name)
+	pass
 
 func Physics_update(_delta) -> void:
 	player.update_hp.emit(damage)
