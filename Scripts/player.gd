@@ -80,6 +80,7 @@ func _update_hp(damage) -> void:
 	else:
 		tween_hp.tween_property(progress_bar, "modulate", Color(1, 0, 0, 0), 0.2)
 	
+	_hit_flash()
 	if current_hp <= 0.0:
 		is_death = true
 		state_machine.is_death.emit()
