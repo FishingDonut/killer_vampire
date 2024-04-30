@@ -1,12 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgarceeiu8ucd"]
+[gd_scene load_steps=18 format=3 uid="uid://bgarceeiu8ucd"]
 
 [ext_resource type="Texture2D" uid="uid://fjcbjy4kflby" path="res://Assests/enemies/ghost/ghost-1.png" id="1_e1gga"]
 [ext_resource type="Script" path="res://Scripts/Enemies/ghost_enemy.gd" id="1_oi33n"]
 [ext_resource type="Texture2D" uid="uid://byh1ltauld4rv" path="res://Assests/enemies/zombie/zombie-a1.png" id="2_2ec05"]
+[ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="2_vr02v"]
 [ext_resource type="Texture2D" uid="uid://74fisgnxo2da" path="res://Assests/enemies/death/white_ball.png" id="3_mx3vb"]
 [ext_resource type="Script" path="res://Scripts/Enemies/HurtCollision.gd" id="4_h04eg"]
 [ext_resource type="Texture2D" uid="uid://gqsjqru6fpgo" path="res://Assests/enemies/ghost/deatht.png" id="5_kwxnd"]
 [ext_resource type="PackedScene" uid="uid://dqvtgon61s8u" path="res://Prefabs/Spawn/spawn_xp.tscn" id="6_kjd0w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltmwp"]
+shader = ExtResource("2_vr02v")
+shader_parameter/flash_intensity = null
 
 [sub_resource type="Animation" id="Animation_23ca7"]
 length = 0.001
@@ -279,6 +284,7 @@ platform_floor_layers = 4294967166
 script = ExtResource("1_oi33n")
 
 [node name="Sprite" type="Sprite2D" parent="." groups=["enemies"]]
+material = SubResource("ShaderMaterial_ltmwp")
 texture = ExtResource("2_2ec05")
 hframes = 5
 vframes = 3

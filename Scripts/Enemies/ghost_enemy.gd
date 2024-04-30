@@ -14,6 +14,7 @@ extends CharacterBody2D
 var direction: Vector2
 var current_hp: float
 var damage: float = 1.0
+var flash_intensity := 0.0
 var is_death: bool = false
 var is_hurt: bool = false
 
@@ -46,6 +47,7 @@ func _physics_process(delta) -> void:
 	direction = (Global.player.position - position).normalized()
 
 func _update_heart(damage: float) -> void:
+	_hit_flash()
 	current_hp -= damage
 	is_hurt = true
 	if current_hp <= 0:
@@ -60,9 +62,6 @@ func _state() -> void:
 	
 	if is_death:
 		state = "death"
-		
-	#elif is_hurt:
-		#pass
 	
 	elif direction:
 		state = "walking"
@@ -77,3 +76,11 @@ func _on_animation_animation_finished(anim_name):
 		queue_free()
 	elif anim_name == "hurt":
 		is_hurt = false
+
+
+func _hit_flash() -> void:
+	flash_intensity = 1.0
+	sprite.material.set_shader_parameter("flash_intensity", flash_intensity)
+	await get_tree().create_timer(0.1).timeout
+	flash_intensity = 0.0
+	sprite.material.set_shader_parameter("flash_intensity", flash_intensity)
