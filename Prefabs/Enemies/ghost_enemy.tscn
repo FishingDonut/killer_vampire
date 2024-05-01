@@ -10,8 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dqvtgon61s8u" path="res://Prefabs/Spawn/spawn_xp.tscn" id="6_kjd0w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltmwp"]
+resource_local_to_scene = true
 shader = ExtResource("2_vr02v")
-shader_parameter/flash_intensity = null
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="Animation" id="Animation_23ca7"]
 length = 0.001
@@ -291,6 +292,7 @@ vframes = 3
 
 [node name="SpriteBall" type="Sprite2D" parent="."]
 visible = false
+y_sort_enabled = true
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_mx3vb")
 
