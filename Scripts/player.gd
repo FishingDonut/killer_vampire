@@ -68,7 +68,11 @@ func _update_hp(damage) -> void:
 	var tween_hp = get_tree().create_tween()
 	current_hp -= damage
 	progress_bar.value = (current_hp / max_hp) * 100
-	if max_hp != current_hp and (current_hp / max_hp) * 100 >= 80:
+	
+	if current_hp >= max_hp:
+		progress_bar.visible = false
+
+	elif max_hp != current_hp and (current_hp / max_hp) * 100 >= 80:
 		tween_hp.tween_property(progress_bar, "modulate", Color(0, 1, 0, 1), 0.2)
 	
 	elif (current_hp / max_hp) * 100 >= 50:
@@ -105,11 +109,10 @@ func _gain_experience(amount) -> void:
 	while experience >= required_experience:
 		experience -= required_experience
 		_level_up()
-
+		
 func _level_up() -> void:
 	level += 1
 	required_experience = _get_required_experience(level + 1)
 	var states := ["speed_walk", "max_hp", "damage"]
 	var random_state = states[randi() % states.size()]
 	set(random_state, get(random_state) * 1.2)
-	print(get(random_state))
