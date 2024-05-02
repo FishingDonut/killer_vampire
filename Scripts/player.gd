@@ -63,16 +63,20 @@ func _scale_direction() -> void:
 	if direction.x != 0:
 		sprite.scale.x = direction.x
 
-func _update_hp(damage) -> void:
-	_hit_flash()
+func _update_hp(amount) -> void:
 	var tween_hp = get_tree().create_tween()
-	current_hp -= damage
-	progress_bar.value = (current_hp / max_hp) * 100
 	
-	if current_hp >= max_hp:
+	if max_hp <= current_hp - amount:
+		current_hp = max_hp
 		progress_bar.visible = false
+	else:
+		progress_bar.visible = true
+		current_hp -= amount
+		_hit_flash()
+	
+	progress_bar.value = (current_hp / max_hp) * 100
 
-	elif max_hp != current_hp and (current_hp / max_hp) * 100 >= 80:
+	if max_hp != current_hp and (current_hp / max_hp) * 100 >= 80:
 		tween_hp.tween_property(progress_bar, "modulate", Color(0, 1, 0, 1), 0.2)
 	
 	elif (current_hp / max_hp) * 100 >= 50:
@@ -84,7 +88,6 @@ func _update_hp(damage) -> void:
 	else:
 		tween_hp.tween_property(progress_bar, "modulate", Color(1, 0, 0, 0), 0.2)
 	
-	_hit_flash()
 	if current_hp <= 0.0:
 		is_death = true
 		state_machine.is_death.emit()
@@ -109,6 +112,7 @@ func _gain_experience(amount) -> void:
 	while experience >= required_experience:
 		experience -= required_experience
 		_level_up()
+		_update_hp(-max_hp)
 		
 func _level_up() -> void:
 	level += 1
