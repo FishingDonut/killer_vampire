@@ -22,12 +22,12 @@ func _on_collision_area_area_entered(area):
 		queue_free()
 
 
-func _on_area_collect_body_entered(body):
-	if body is Player:
-		player = body
+func _on_area_collect_area_entered(area):
+	if area.get_parent() is Player:
+		player = area.get_parent()
 		body_inside = true
 
 
-func _on_area_collect_body_exited(body):
-	body_inside = false
-
+func _on_area_collect_area_exited(area):
+	if area.get_parent() is Player:
+		body_inside = false
