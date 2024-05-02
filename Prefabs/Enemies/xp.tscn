@@ -29,5 +29,7 @@ debug_color = Color(0.470588, 0.443137, 1, 0.419608)
 
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_collision_area_area_entered"]
 [connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]
+[connection signal="area_entered" from="AreaCollect" to="." method="_on_area_collect_area_entered"]
+[connection signal="area_exited" from="AreaCollect" to="." method="_on_area_collect_area_exited"]
 [connection signal="body_entered" from="AreaCollect" to="." method="_on_area_collect_body_entered"]
 [connection signal="body_exited" from="AreaCollect" to="." method="_on_area_collect_body_exited"]

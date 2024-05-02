@@ -1,8 +1,10 @@
 extends Node2D
 
 @export var xp_value: float = randi_range(1, 3)
-@export var speed := 1
+@export var speed: float = 0.1
 
+var body_inside : bool = false
+var player : Player
 var direction : Vector2
 
 func _ready():
@@ -10,9 +12,9 @@ func _ready():
 
 
 func _process(delta):
-	if direction:
+	if body_inside and player:
+		direction = (player.position - position).normalized()
 		position += direction * speed
-
 
 func _on_collision_area_area_entered(area):
 	if area.get_parent() is Player:
@@ -22,11 +24,10 @@ func _on_collision_area_area_entered(area):
 
 func _on_area_collect_body_entered(body):
 	if body is Player:
-		_folow_body(body)
-
-func _folow_body(body) -> void:
-	direction = (body.position - position).normalized()
+		player = body
+		body_inside = true
 
 
 func _on_area_collect_body_exited(body):
-	direction = Vector2.ZERO
+	body_inside = false
+
