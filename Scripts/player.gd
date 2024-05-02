@@ -73,7 +73,7 @@ func _update_hp(amount) -> void:
 		progress_bar.visible = true
 		current_hp -= amount
 		_hit_flash()
-	
+
 	progress_bar.value = (current_hp / max_hp) * 100
 
 	if max_hp != current_hp and (current_hp / max_hp) * 100 >= 80:

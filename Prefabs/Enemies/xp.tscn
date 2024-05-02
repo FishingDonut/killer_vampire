@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cibafeqhqfvgx"]
+[gd_scene load_steps=5 format=3 uid="uid://cibafeqhqfvgx"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/xp.gd" id="1_dlh1y"]
 [ext_resource type="Texture2D" uid="uid://ct4fp217lk8bl" path="res://Assests/enemies/xp-1.png" id="2_12ts5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6h36u"]
 radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qx5f4"]
+radius = 21.0
 
 [node name="Xp" type="Node2D"]
 y_sort_enabled = true
@@ -18,5 +21,13 @@ texture = ExtResource("2_12ts5")
 [node name="CollisionCollete" type="CollisionShape2D" parent="CollisionArea"]
 shape = SubResource("CircleShape2D_6h36u")
 
+[node name="AreaCollect" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="AreaCollect"]
+shape = SubResource("CircleShape2D_qx5f4")
+debug_color = Color(0.470588, 0.443137, 1, 0.419608)
+
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_collision_area_area_entered"]
 [connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]
+[connection signal="body_entered" from="AreaCollect" to="." method="_on_area_collect_body_entered"]
+[connection signal="body_exited" from="AreaCollect" to="." method="_on_area_collect_body_exited"]
