@@ -307,7 +307,6 @@ position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_i87tc")
 
 [node name="SpawnXp" parent="." instance=ExtResource("6_kjd0w")]
-position = Vector2(0, 7)
 
 [node name="HurtAreaCollision" type="Area2D" parent="." groups=["enemies"]]
 collision_layer = 2

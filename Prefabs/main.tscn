@@ -20,9 +20,9 @@ max_hp = 300.0
 
 [node name="SpawnEnemy" parent="World" node_paths=PackedStringArray("player") instance=ExtResource("4_1m028")]
 player = NodePath("../Player")
-move_speed = 25.0
+move_speed = 20.0
 max_hp = 10.0
-time_interval = 0.5
+time_interval = 0.2
 max_enemies = 1
 min_distance = 100
 max_distance = 300
