@@ -121,4 +121,5 @@ func _level_up() -> void:
 	required_experience = _get_required_experience(level + 1)
 	var states := ["speed_walk", "max_hp", "damage"]
 	var random_state = states[randi() % states.size()]
-	set(random_state, get(random_state) * 1.2)
+	set("speed_walk", get("speed_walk") * 1.02)
+	print(get("speed_walk"))
