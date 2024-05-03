@@ -27,6 +27,7 @@ var direction := Vector2.ZERO
 var is_death: bool = false
 var flash_intensity := 0.0
 
+
 signal update_hp(damage: float)
 signal collect_xp(xp_value: float)
 
@@ -113,7 +114,8 @@ func _gain_experience(amount) -> void:
 		experience -= required_experience
 		_level_up()
 		_update_hp(-max_hp)
-		
+
+
 func _level_up() -> void:
 	level += 1
 	required_experience = _get_required_experience(level + 1)
