@@ -1,7 +1,9 @@
 extends Node2D
 
 @export var xp_value: float = randi_range(1, 3)
-@export var speed: float = 0.1
+@export var speed: float = 1.0
+
+@onready var sprite = $Sprite
 
 var body_inside : bool = false
 var player : Player
@@ -12,6 +14,7 @@ func _ready():
 
 
 func _process(delta):
+
 	if body_inside and player:
 		direction = (player.position - position).normalized()
 		position += direction * speed
