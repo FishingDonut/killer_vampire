@@ -23,7 +23,7 @@ player = NodePath("../Player")
 move_speed = 20.0
 max_hp = 10.0
 time_interval = 0.2
-max_enemies = 1
+max_enemies = 100
 min_distance = 100
 max_distance = 300
 
